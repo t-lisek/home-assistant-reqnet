@@ -1,0 +1,116 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "REQNET Recuperator",
+        "description": "Enter the IP address of your REQNET recuperator device.",
+        "data": {
+          "host": "IP Address"
+        }
+      },
+      "update_method": {
+        "title": "Update method",
+        "description": "Your Home Assistant has an MQTT broker configured. MQTT provides instant state updates. Polling checks the device on a fixed interval.",
+        "data": {
+          "update_method": "Update method"
+        }
+      },
+      "mqtt_broker": {
+        "title": "MQTT broker",
+        "description": "Enter your Home Assistant MQTT broker details. The device will be configured to publish state updates to this broker.",
+        "data": {
+          "broker_host": "Broker host",
+          "broker_port": "Broker port",
+          "broker_user": "Username (optional)",
+          "broker_password": "Password (optional)"
+        }
+      },
+      "poll_interval": {
+        "title": "Polling interval",
+        "description": "How often to query the device for state updates.",
+        "data": {
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to device. Check the IP address and that the device is reachable.",
+      "not_reqnet_device": "The device responded but does not appear to be a REQNET recuperator.",
+      "mqtt_configure_failed": "Failed to configure MQTT broker on the device. You can retry or fall back to polling."
+    },
+    "abort": {
+      "already_configured": "This device is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manual mode settings",
+        "data": {
+          "manual_airflow_supply": "Supply airflow in manual mode (m³/h)",
+          "manual_airflow_extract": "Extract airflow in manual mode (m³/h)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "temp_intake": { "name": "Intake temperature" },
+      "temp_exhaust": { "name": "Exhaust temperature" },
+      "temp_supply": { "name": "Supply temperature" },
+      "temp_extract": { "name": "Extract temperature" },
+      "humidity": { "name": "Humidity" },
+      "co2": { "name": "CO2" },
+      "airflow_supply": { "name": "Supply airflow" },
+      "airflow_extract": { "name": "Extract airflow" },
+      "fan_supply": { "name": "Supply fan speed" },
+      "fan_extract": { "name": "Extract fan speed" },
+      "fan_power_supply": { "name": "Supply fan power" },
+      "fan_power_extract": { "name": "Extract fan power" },
+      "pressure_supply": { "name": "Supply pressure" },
+      "pressure_extract": { "name": "Extract pressure" },
+      "resistance_supply": { "name": "Supply duct resistance" },
+      "resistance_extract": { "name": "Extract duct resistance" },
+      "mode": { "name": "Operating mode" },
+      "bypass_state": { "name": "Bypass state" },
+      "preheater_active": { "name": "Preheater" },
+      "filter_days": { "name": "Days to filter replacement" },
+      "time_remaining_min": { "name": "Mode time remaining" },
+      "holiday_days_left": { "name": "Holiday days remaining" },
+      "error_code": { "name": "Error code" }
+    },
+    "select": {
+      "mode_select": {
+        "name": "Mode",
+        "state": {
+          "auto": "Automatic",
+          "manual": "Manual",
+          "fireplace": "Fireplace",
+          "holiday": "Holiday",
+          "airing": "Airing",
+          "cleaning": "Cleaning"
+        }
+      },
+      "bypass_select": {
+        "name": "Bypass",
+        "state": {
+          "closed": "Closed",
+          "open": "Open",
+          "auto": "Automatic"
+        }
+      }
+    },
+    "button": {
+      "airing_15": { "name": "Airing 15 min" },
+      "airing_30": { "name": "Airing 30 min" },
+      "fireplace_5": { "name": "Fireplace 5 min" },
+      "cleaning_5": { "name": "Cleaning 5 min" },
+      "holiday_7": { "name": "Holiday 7 days" },
+      "cancel_airing": { "name": "Cancel airing" },
+      "cancel_cleaning": { "name": "Cancel cleaning" },
+      "cancel_fireplace": { "name": "Cancel fireplace" },
+      "cancel_holiday": { "name": "Cancel holiday" },
+      "replace_filters": { "name": "Reset filter counter" }
+    }
+  }
+}

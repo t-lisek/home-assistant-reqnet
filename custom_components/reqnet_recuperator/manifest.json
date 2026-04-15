@@ -1,0 +1,12 @@
+{
+  "domain": "reqnet_recuperator",
+  "name": "REQNET Recuperator",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://github.com/t-lisek/home-assistant-reqnet",
+  "issue_tracker": "https://github.com/t-lisek/home-assistant-reqnet/issues",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "requirements": [],
+  "version": "0.1.0"
+}
