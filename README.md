@@ -146,4 +146,6 @@ After setup, click **Configure** on the integration to adjust:
 
 ## API Reference
 
-Official REQNET API documentation: [portal.inprax.pl](https://portal.inprax.pl/REQNET/OpisyAPI_REQNET?ID_TYPU=9)
+Full endpoint reference (scraped): [`docs/api-reference.md`](docs/api-reference.md)
+
+Official source: [portal.inprax.pl](https://portal.inprax.pl/REQNET/OpisyAPI_REQNET?ID_TYPU=9)
