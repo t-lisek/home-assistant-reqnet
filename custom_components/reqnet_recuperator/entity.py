@@ -1,8 +1,6 @@
 """Base entity for REQNET Recuperator."""
 from __future__ import annotations
 
-from __future__ import annotations
-
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -12,8 +10,6 @@ from .coordinator import ReqnetDataUpdateCoordinator
 
 
 class ReqnetEntity(CoordinatorEntity[ReqnetDataUpdateCoordinator]):
-    """Base class for all REQNET entities. Accepts both coordinator types since
-    ReqnetMqttCoordinator subclasses ReqnetDataUpdateCoordinator."""
     """Base class for all REQNET entities."""
 
     _attr_has_entity_name = True

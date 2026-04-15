@@ -24,8 +24,6 @@ class ReqnetButtonEntityDescription(ButtonEntityDescription):
     """Extends ButtonEntityDescription with an API call factory."""
 
     api_call: Callable[[ReqnetApiClient], Coroutine[Any, Any, None]]
-    # Mode number to set optimistically after press (None = no mode optimism)
-    optimistic_mode: int | None = None
 
 
 BUTTON_DESCRIPTIONS: tuple[ReqnetButtonEntityDescription, ...] = (
@@ -34,35 +32,30 @@ BUTTON_DESCRIPTIONS: tuple[ReqnetButtonEntityDescription, ...] = (
             name="Airing 15 min",
             icon="mdi:weather-windy",
             api_call=lambda c: c.async_set_mode_airing(15),
-            optimistic_mode=4,
         ),
         ReqnetButtonEntityDescription(
             key="airing_30",
             name="Airing 30 min",
             icon="mdi:weather-windy",
             api_call=lambda c: c.async_set_mode_airing(30),
-            optimistic_mode=4,
         ),
         ReqnetButtonEntityDescription(
             key="fireplace_5",
             name="Fireplace 5 min",
             icon="mdi:fireplace",
             api_call=lambda c: c.async_set_mode_fireplace(5),
-            optimistic_mode=6,
         ),
         ReqnetButtonEntityDescription(
             key="cleaning_5",
             name="Cleaning 5 min",
             icon="mdi:air-filter",
             api_call=lambda c: c.async_set_mode_cleaning(5),
-            optimistic_mode=5,
         ),
         ReqnetButtonEntityDescription(
             key="holiday_7",
             name="Holiday 7 days",
             icon="mdi:airplane-takeoff",
             api_call=lambda c: c.async_set_mode_holiday(7),
-            optimistic_mode=3,
         ),
         ReqnetButtonEntityDescription(
             key="cancel_airing",

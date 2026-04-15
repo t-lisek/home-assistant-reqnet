@@ -44,6 +44,9 @@ class ReqnetMqttCoordinator(ReqnetDataUpdateCoordinator):
             if not self._first_fetch_logged:
                 _LOGGER.debug("REQNET MQTT raw Values[]: %s", values)
                 self._first_fetch_logged = True
-            self.async_set_updated_data(parse_values(values))
+            parsed = parse_values(values)
+            if parsed == self.data:
+                return
+            self.async_set_updated_data(parsed)
         except (json.JSONDecodeError, ValueError, IndexError, TypeError) as err:
             _LOGGER.warning("REQNET MQTT: failed to parse message: %s", err)

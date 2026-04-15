@@ -35,7 +35,6 @@
     },
     "error": {
       "cannot_connect": "Nie można połączyć się z urządzeniem. Sprawdź adres IP i dostępność urządzenia w sieci.",
-      "not_reqnet_device": "Urządzenie odpowiedziało, ale nie wydaje się być rekuperatorem REQNET.",
       "mqtt_configure_failed": "Nie udało się skonfigurować brokera MQTT na urządzeniu. Możesz spróbować ponownie lub przejść na tryb odpytywania."
     },
     "abort": {
@@ -54,31 +53,6 @@
     }
   },
   "entity": {
-    "sensor": {
-      "temp_intake": { "name": "Temperatura czerpni" },
-      "temp_exhaust": { "name": "Temperatura wyrzutni" },
-      "temp_supply": { "name": "Temperatura nawiewu" },
-      "temp_extract": { "name": "Temperatura wyciągu" },
-      "humidity": { "name": "Wilgotność" },
-      "co2": { "name": "CO2" },
-      "airflow_supply": { "name": "Przepływ nawiewu" },
-      "airflow_extract": { "name": "Przepływ wyciągu" },
-      "fan_supply": { "name": "Prędkość wentylatora nawiewnego" },
-      "fan_extract": { "name": "Prędkość wentylatora wywiewnego" },
-      "fan_power_supply": { "name": "Moc wentylatora nawiewnego" },
-      "fan_power_extract": { "name": "Moc wentylatora wywiewnego" },
-      "pressure_supply": { "name": "Ciśnienie nawiewu" },
-      "pressure_extract": { "name": "Ciśnienie wyciągu" },
-      "resistance_supply": { "name": "Opór kanału nawiewnego" },
-      "resistance_extract": { "name": "Opór kanału wywiewnego" },
-      "mode": { "name": "Tryb pracy" },
-      "bypass_state": { "name": "Stan bypass" },
-      "preheater_active": { "name": "Nagrzewnica wstępna" },
-      "filter_days": { "name": "Dni do wymiany filtrów" },
-      "time_remaining_min": { "name": "Pozostały czas trybu" },
-      "holiday_days_left": { "name": "Pozostałe dni urlopu" },
-      "error_code": { "name": "Kod błędu" }
-    },
     "select": {
       "mode_select": {
         "name": "Tryb",
@@ -99,18 +73,6 @@
           "auto": "Automatyczny"
         }
       }
-    },
-    "button": {
-      "airing_15": { "name": "Przewietrzanie 15 min" },
-      "airing_30": { "name": "Przewietrzanie 30 min" },
-      "fireplace_5": { "name": "Kominek 5 min" },
-      "cleaning_5": { "name": "Oczyszczanie 5 min" },
-      "holiday_7": { "name": "Urlop 7 dni" },
-      "cancel_airing": { "name": "Anuluj przewietrzanie" },
-      "cancel_cleaning": { "name": "Anuluj oczyszczanie" },
-      "cancel_fireplace": { "name": "Anuluj kominek" },
-      "cancel_holiday": { "name": "Anuluj urlop" },
-      "replace_filters": { "name": "Resetuj licznik filtrów" }
     }
   }
 }

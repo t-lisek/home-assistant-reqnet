@@ -31,11 +31,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         mac = entry.data.get(CONF_MAC, "")
         coordinator = ReqnetMqttCoordinator(hass, client, mac)
         await coordinator.async_setup()
+        try:
+            await coordinator.async_config_entry_first_refresh()
+        except Exception:
+            await coordinator.async_teardown()
+            raise
     else:
         scan_interval = entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
         coordinator = ReqnetDataUpdateCoordinator(hass, client, scan_interval)
-
-    await coordinator.async_config_entry_first_refresh()
+        await coordinator.async_config_entry_first_refresh()
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
 
@@ -47,7 +51,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
-    coordinator = hass.data[DOMAIN].get(entry.entry_id)
+    coordinator = hass.data.get(DOMAIN, {}).get(entry.entry_id)
     if isinstance(coordinator, ReqnetMqttCoordinator):
         await coordinator.async_teardown()
 

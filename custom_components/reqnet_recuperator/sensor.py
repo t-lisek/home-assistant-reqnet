@@ -28,13 +28,7 @@ from .entity import ReqnetEntity
 
 @dataclass(frozen=True, kw_only=True)
 class ReqnetSensorEntityDescription(SensorEntityDescription):
-    """Extends SensorEntityDescription with a coordinator data key (defaults to key)."""
-
-    data_key: str = ""
-
-    def __post_init__(self) -> None:
-        if not self.data_key:
-            object.__setattr__(self, "data_key", self.key)
+    """Sensor description for REQNET entities."""
 
 
 SENSOR_DESCRIPTIONS: tuple[ReqnetSensorEntityDescription, ...] = (
@@ -220,4 +214,4 @@ class ReqnetSensor(ReqnetEntity, SensorEntity):
 
     @property
     def native_value(self) -> Any:
-        return self.coordinator.data.get(self.entity_description.data_key)
+        return self.coordinator.data.get(self.entity_description.key)

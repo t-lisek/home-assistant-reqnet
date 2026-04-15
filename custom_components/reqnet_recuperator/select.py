@@ -220,5 +220,16 @@ class ReqnetBypassSelect(OptimisticSelectMixin, ReqnetEntity, SelectEntity):
             raise HomeAssistantError(str(err)) from err
         self._set_optimistic(option)
 
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        if self._optimistic_option is not None:
+            real_option = _BYPASS_STATE_TO_OPTION.get(
+                self.coordinator.data.get("bypass_state")
+            )
+            if real_option is not None:
+                self._cancel_pending_optimistic()
+                self._optimistic_option = None
+        super()._handle_coordinator_update()
+
     async def async_will_remove_from_hass(self) -> None:
         self._cancel_pending_optimistic()

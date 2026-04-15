@@ -126,24 +126,28 @@ class ReqnetConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            broker_host = user_input[CONF_BROKER_HOST]
+            broker_port = int(user_input[CONF_BROKER_PORT])
+            broker_user = user_input.get(CONF_BROKER_USER, "")
+            broker_password = user_input.get(CONF_BROKER_PASSWORD, "")
             session = async_get_clientsession(self.hass)
             client = ReqnetApiClient(self._host, session)
             try:
                 await client.async_configure_additional_broker(
-                    broker_host=user_input[CONF_BROKER_HOST],
-                    broker_port=int(user_input[CONF_BROKER_PORT]),
-                    broker_user=user_input.get(CONF_BROKER_USER, ""),
-                    broker_password=user_input.get(CONF_BROKER_PASSWORD, ""),
+                    broker_host=broker_host,
+                    broker_port=broker_port,
+                    broker_user=broker_user,
+                    broker_password=broker_password,
                 )
             except ReqnetApiError:
                 errors["base"] = "mqtt_configure_failed"
             else:
                 return self._create_entry(
                     update_method=UPDATE_METHOD_MQTT,
-                    broker_host=user_input[CONF_BROKER_HOST],
-                    broker_port=int(user_input[CONF_BROKER_PORT]),
-                    broker_user=user_input.get(CONF_BROKER_USER, ""),
-                    broker_password=user_input.get(CONF_BROKER_PASSWORD, ""),
+                    broker_host=broker_host,
+                    broker_port=broker_port,
+                    broker_user=broker_user,
+                    broker_password=broker_password,
                 )
 
         return self.async_show_form(
