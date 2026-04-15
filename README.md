@@ -146,6 +146,4 @@ After setup, click **Configure** on the integration to adjust:
 
 ## API Reference
 
-Full REQNET API documentation scraped and available in [`docs/api-reference.md`](docs/api-reference.md) (not included in HACS release).
-
-Official source: [portal.inprax.pl](https://portal.inprax.pl/REQNET/OpisyAPI_REQNET?ID_TYPU=9)
+Official REQNET API documentation: [portal.inprax.pl](https://portal.inprax.pl/REQNET/OpisyAPI_REQNET?ID_TYPU=9)
