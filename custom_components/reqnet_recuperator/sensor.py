@@ -192,10 +192,12 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     coordinator: ReqnetDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
-    async_add_entities(
+    entities: list[SensorEntity] = [
         ReqnetSensor(coordinator, entry, description)
         for description in SENSOR_DESCRIPTIONS
-    )
+    ]
+    entities.append(ReqnetEfficiencySensor(coordinator, entry))
+    async_add_entities(entities)
 
 
 class ReqnetSensor(ReqnetEntity, SensorEntity):
@@ -215,3 +217,33 @@ class ReqnetSensor(ReqnetEntity, SensorEntity):
     @property
     def native_value(self) -> Any:
         return self.coordinator.data.get(self.entity_description.key)
+
+
+class ReqnetEfficiencySensor(ReqnetEntity, SensorEntity):
+    """Heat recovery efficiency: (T_supply - T_intake) / (T_extract - T_intake) * 100."""
+
+    _attr_name = "Heat Recovery Efficiency"
+    _attr_native_unit_of_measurement = PERCENTAGE
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_icon = "mdi:heat-wave"
+    _attr_suggested_display_precision = 1
+
+    def __init__(
+        self,
+        coordinator: ReqnetDataUpdateCoordinator,
+        entry: ConfigEntry,
+    ) -> None:
+        super().__init__(coordinator, entry, "heat_recovery_efficiency")
+
+    @property
+    def native_value(self) -> float | None:
+        data = self.coordinator.data
+        t_supply = data.get("temp_supply")
+        t_intake = data.get("temp_intake")
+        t_extract = data.get("temp_extract")
+        if t_supply is None or t_intake is None or t_extract is None:
+            return None
+        delta = t_extract - t_intake
+        if abs(delta) < 0.1:
+            return None
+        return round((t_supply - t_intake) / delta * 100, 1)
