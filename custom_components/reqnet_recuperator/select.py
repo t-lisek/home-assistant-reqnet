@@ -124,6 +124,7 @@ class ReqnetModeSelect(OptimisticSelectMixin, ReqnetEntity, SelectEntity):
     """Controls the operating mode of the recuperator."""
 
     _attr_assumed_state = True
+    _attr_name = "Mode"
     _attr_translation_key = "mode_select"
     _attr_options = [
         SELECT_MODE_AUTO,
@@ -193,6 +194,7 @@ class ReqnetBypassSelect(OptimisticSelectMixin, ReqnetEntity, SelectEntity):
     """Controls the bypass valve mode."""
 
     _attr_assumed_state = True
+    _attr_name = "Bypass"
     _attr_translation_key = "bypass_select"
     _attr_options = [SELECT_BYPASS_CLOSED, SELECT_BYPASS_OPEN, SELECT_BYPASS_AUTO]
     _attr_icon = "mdi:valve"
