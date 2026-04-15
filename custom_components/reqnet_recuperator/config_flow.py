@@ -66,18 +66,15 @@ class ReqnetConfigFlow(ConfigFlow, domain=DOMAIN):
             client = ReqnetApiClient(host, session)
 
             try:
-                status = await client.async_get_status_device()
+                info = await client.async_get_api_info()
             except ReqnetApiError:
                 errors["base"] = "cannot_connect"
             else:
-                if not status.get("StatusDeviceResult"):
-                    errors["base"] = "not_reqnet_device"
-                else:
-                    self._host = host
-                    self._mac = status.get("MAC", "")
-                    await self.async_set_unique_id(self._mac or host)
-                    self._abort_if_unique_id_configured()
-                    return await self.async_step_update_method()
+                self._host = host
+                self._mac = info.get("MAC", "")
+                await self.async_set_unique_id(self._mac or host)
+                self._abort_if_unique_id_configured()
+                return await self.async_step_update_method()
 
         return self.async_show_form(
             step_id="user",

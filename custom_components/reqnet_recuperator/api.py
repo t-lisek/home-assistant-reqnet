@@ -47,11 +47,11 @@ class ReqnetApiClient:
     # Read
     # -------------------------------------------------------------------------
 
-    async def async_get_status_device(self) -> dict[str, Any]:
-        """Return basic device info (used to verify device identity + get MAC)."""
-        data = await self._async_request({"name": "StatusDevice"})
-        if not data.get("StatusDeviceResult"):
-            raise ReqnetApiError("StatusDevice returned failure result")
+    async def async_get_api_info(self) -> dict[str, Any]:
+        """Return basic device info including MAC. Available on all firmware versions."""
+        data = await self._async_request({"name": "API"})
+        if not data.get("APIResult"):
+            raise ReqnetApiError("API endpoint returned failure result")
         return data
 
     async def async_get_current_work_parameters(self) -> dict[str, Any]:
