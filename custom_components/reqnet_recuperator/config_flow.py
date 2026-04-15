@@ -67,7 +67,8 @@ class ReqnetConfigFlow(ConfigFlow, domain=DOMAIN):
 
             try:
                 info = await client.async_get_api_info()
-            except ReqnetApiError:
+            except ReqnetApiError as err:
+                _LOGGER.error("REQNET cannot connect to %s: %s", host, err)
                 errors["base"] = "cannot_connect"
             else:
                 self._host = host
